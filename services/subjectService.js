@@ -101,8 +101,7 @@ const SubjectService = {
       },
     },
   },
-  //archivo wsdl
-  wsdl: wsdlService, // or xml (both options are valid)
+  wsdl: wsdlService,
 };
 
 module.exports = { service: SubjectService, xml: wsdlService };
