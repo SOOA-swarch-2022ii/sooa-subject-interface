@@ -1,0 +1,56 @@
+
+<definitions name="SubjectService" targetNamespace="http://tempuri.org/"
+    xmlns="http://schemas.xmlsoap.org/wsdl/"
+    xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+    xmlns:tns="http://tempuri.org/"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <types>
+        <xsd:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+            <xsd:element name="GetSubject">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element minOccurs="0" name="codigo_asignatura" type="xsd:int" />
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="GetSubjectResponse">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element minOccurs="0" name="GetSubjectResult" nillable="true" type="xsd:int" />
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+        </xsd:schema>
+    </types>
+    <message name="GetSubjectSoapIn">
+        <part name="parameters" element="tns:GetSubject" />
+    </message>
+    <message name="GetSubjectSoapOut">
+        <part name="parameters" element="tns:GetSubjectResponse" />
+    </message>
+    <portType name="SubjectSoap">
+        <operation name="GetSubject">
+            <input message="tns:GetSubjectSoapIn" />
+            <output message="tns:GetSubjectSoapOut" />
+        </operation>
+    </portType>
+    <binding name="SubjectSoap" type="tns:SubjectSoap">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" />
+        <operation name="GetSubject">
+            <soap:operation soapAction="http://tempuri.org/GetSubject" style="document" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body>
+                    <soap:encodingStyle value="http://schemas.xmlsoap.org/soap/encoding/" />
+                </soap:body>
+            </output>
+        </operation>
+    </binding>
+    <service name="SubjectService">
+        <port name="SubjectSoap" binding="tns:SubjectSoap">
+            <soap:address location="http://localhost:3000/soap/subject" />
+        </port>
+    </service>
+</definitions>
